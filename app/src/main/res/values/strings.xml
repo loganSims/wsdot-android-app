@@ -144,4 +144,10 @@
     <string name="favorites_seven">KEY_SEVENTH_FAVORITES_SECTION_v1</string>
     <string name="favorites_eight">KEY_EIGHTH_FAVORITES_SECTION_v1</string>
 
+    <!-- App shortcuts-->
+    <string name="traffic_map_shortcut_short_label">test</string>
+    <string name="traffic_map_shortcut_long_label">test</string>
+    <string name="traffic_map_disabled_message">test</string>
+
+
 </resources>
