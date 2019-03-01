@@ -3,7 +3,7 @@
     <shortcut
         android:shortcutId="traffic"
         android:enabled="true"
-        android:icon="@drawable/compose_icon"
+        android:icon="@drawable/alert_high"
         android:shortcutShortLabel="@string/traffic_map_shortcut_short_label"
         android:shortcutLongLabel="@string/traffic_map_shortcut_long_label"
         android:shortcutDisabledMessage="@string/traffic_map_disabled_message">
@@ -11,7 +11,7 @@
         <intent
             android:action="android.intent.action.VIEW"
             android:targetPackage="gov.wa.wsdot.android.wsdot"
-            android:targetClass="gov.wa.wsdot.android.wsdot.ui.home.HomeActivity" />
+            android:targetClass="gov.wa.wsdot.android.wsdot.ui.trafficmap.TrafficMapActivity" />
         <!-- If your shortcut is associated with multiple intents, include them
              here. The last intent in the list determines what the user sees when
              they launch this shortcut. -->
