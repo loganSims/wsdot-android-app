@@ -19,14 +19,23 @@
 package gov.wa.wsdot.android.wsdot.ui.tollrates;
 
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.Set;
 import java.util.TreeSet;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,7 +45,7 @@ import gov.wa.wsdot.android.wsdot.ui.BaseFragment;
 import gov.wa.wsdot.android.wsdot.util.decoration.SimpleDividerItemDecoration;
 
 public class SR520TollRatesFragment extends BaseFragment {
-	
+
     private static final String TAG = SR520TollRatesFragment.class.getSimpleName();
     private Adapter mAdapter;
 
@@ -45,9 +54,13 @@ public class SR520TollRatesFragment extends BaseFragment {
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
+
+	    // TODO
+	    getTollIndex();
+
         super.onCreate(savedInstanceState);        
     }
-    
+
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -71,13 +84,14 @@ public class SR520TollRatesFragment extends BaseFragment {
                 ViewGroup.LayoutParams.MATCH_PARENT));
         
         return root;
-    }	
-    
+    }
+
     @Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		
         HashMap<String, String> map = null;
+
         String[][] weekdayData = {
         		{"Midnight to 5 AM", "$1.25", "$3.25"},
         		{"5 AM to 6 AM", "$2.00", "$4.00"},
@@ -103,15 +117,15 @@ public class SR520TollRatesFragment extends BaseFragment {
         		{"11 PM to 11:59 PM", "$1.25", "$3.25"}
         		};
         
-        map = new HashMap<String, String>();
+        map = new HashMap<>();
         map.put("hours", "Monday to Friday");
         map.put("goodtogo_pass", "Good To Go! Pass");
         map.put("pay_by_mail", "Pay By Mail");
         mAdapter.addSeparatorItem(map);
-        
+
         BuildAdapterData(weekdayData);
         
-        map = new HashMap<String, String>();
+        map = new HashMap<>();
         map.put("hours", "Weekends and Holidays");
         map.put("goodtogo_pass", "Good To Go! Pass");
         map.put("pay_by_mail", "Pay By Mail");
@@ -124,7 +138,7 @@ public class SR520TollRatesFragment extends BaseFragment {
     	HashMap<String, String> map = null;
     	
         for (int i = 0; i < data.length; i++) {
-        	map = new HashMap<String, String>();
+        	map = new HashMap<>();
         	map.put("hours", data[i][0]);
             map.put("goodtogo_pass", data[i][1]);
             map.put("pay_by_mail", data[i][2]);
@@ -228,11 +242,12 @@ public class SR520TollRatesFragment extends BaseFragment {
 
         public ItemViewHolder(View itemView) {
             super(itemView);
-            hours = (TextView) itemView.findViewById(R.id.hours);
-            goodToGoPass = (TextView) itemView.findViewById(R.id.goodtogo_pass);
-            payByMail = (TextView) itemView.findViewById(R.id.pay_by_mail);
+            hours = itemView.findViewById(R.id.hours);
+            goodToGoPass = itemView.findViewById(R.id.goodtogo_pass);
+            payByMail = itemView.findViewById(R.id.pay_by_mail);
         }
     }
+
     public static class TitleViewHolder extends RecyclerView.ViewHolder {
         protected TextView hours;
         protected TextView goodToGoPass;
@@ -240,9 +255,180 @@ public class SR520TollRatesFragment extends BaseFragment {
 
         public TitleViewHolder(View itemView) {
             super(itemView);
-            hours = (TextView) itemView.findViewById(R.id.hours_title);
-            goodToGoPass = (TextView) itemView.findViewById(R.id.goodtogo_pass_title);
-            payByMail = (TextView) itemView.findViewById(R.id.pay_by_mail_title);
+            hours = itemView.findViewById(R.id.hours_title);
+            goodToGoPass = itemView.findViewById(R.id.goodtogo_pass_title);
+            payByMail = itemView.findViewById(R.id.pay_by_mail_title);
         }
+    }
+
+    private static int getTollIndex(){
+
+        if (Build.VERSION.SDK_INT > 25) {
+
+            ZoneId z = ZoneId.of("America/Montreal");
+            LocalDate today = LocalDate.now(z);
+            DayOfWeek dow = today.getDayOfWeek();
+            Set<DayOfWeek> weekend = EnumSet.of( DayOfWeek.SATURDAY , DayOfWeek.SUNDAY );
+
+            Boolean isWeekend = weekend.contains(dow);
+
+            Boolean isHoliday = is_WAC_468_270_071_Holiday(today);
+
+            int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+
+            if (isWeekend || isHoliday){
+                switch (hour) {
+                    case 0: case 1: case 2: case 4:
+                        // midnight to 5 am
+                        return 14;
+                    case 5: case 6: case 7:
+                        // 5 am to 8 am
+                        return 15;
+                    case 8: case 9: case 10:
+                        // 8 am to 11 am
+                        return 16;
+                    case 11: case 12: case 13: case 14: case 15: case 16: case 17:
+                        // 11 am to 6 pm
+                        return 17;
+                    case 18: case 19: case 20:
+                        // 6 pm to 9 pm
+                        return 18;
+                    case 21: case 22:
+                        // 9 pm to 11 pm
+                        return 19;
+                    case 23:
+                        // "11 pm"
+                        return 20;
+                    default:
+                        return -1;
+                }
+            } else {
+                switch (hour) {
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                        // Midnight to 5 am
+                        return 1;
+                    case 5:
+                        // 5am to 6am
+                        return 2;
+                    case 6:
+                        // 6am to 7am
+                        return 3;
+                    case 7:
+                    case 8:
+                        // 7am to 9am
+                        return 4;
+                    case 9:
+                        // 9am to 10am
+                        return 5;
+                    case 10:
+                    case 11:
+                    case 12:
+                    case 13:
+                        // 10am to 2pm
+                        return 6;
+                    case 14:
+                        // 2pm to 3pm
+                        return 7;
+                    case 15:
+                    case 16:
+                    case 17:
+                        // 3pm to 6pm
+                        return 8;
+                    case 18:
+                        // 6pm to 7pm
+                        return 9;
+                    case 19:
+                    case 20:
+                        // 7pm to 9pm
+                        return 10;
+                    case 21:
+                    case 22:
+                        // 9pm to 11pm
+                        return 11;
+                    case 23:
+                        // 11pm
+                        return 12;
+                    default:
+                        return -1;
+                }
+            }
+        } else {
+            return -1;
+        }
+    }
+
+    private static Boolean is_WAC_468_270_071_Holiday(LocalDate date) {
+
+        if (Build.VERSION.SDK_INT > 25) {
+
+            int weekday = date.getDayOfWeek().getValue();
+            int day = date.getDayOfMonth();
+            int month = date.getMonth().getValue();
+            int week = date.getDayOfWeek().ordinal();
+
+            Log.e(TAG, String.valueOf(month));
+            Log.e(TAG, String.valueOf(week));
+            Log.e(TAG, String.valueOf(weekday));
+            Log.e(TAG, String.valueOf(day));
+
+            getMemorialDayForYear(date.getYear());
+
+            if (day == 1 && month == 1) { // New Years
+                Log.e(TAG, "happy new year!");
+                return true;
+            } else if (month == 5 && day == getMemorialDayForYear(date.getYear())) { // Memorial Day
+                return true;
+            } else if (day == 4 && month == 7) { // Independence Day
+                return true;
+            } else if (month == 9 && weekday == 2 && week == 1) {  // Labor Day - 1st Mon in Sept
+                return true;
+            } else if (month == 11 && weekday == 5 && week == 4) { // Thanksgiving = 4th Thurs in Nov
+                return true;
+            } else if (month == 12 && day == 25) { // Christmas day
+                return true;
+            }
+        }
+
+        Log.e(TAG, "No holiday today...");
+
+        return false;
+    }
+
+    // returns the date of memorial day for the given year
+    private static int getMemorialDayForYear(int year) {
+
+        Log.e(TAG, "checking for memorial day");
+
+        if (Build.VERSION.SDK_INT > 25) {
+
+            Calendar cal = Calendar.getInstance();
+
+            // set calendar to current year based on date given
+            cal.set(Calendar.YEAR, year);
+
+            // set calendar to the first monday of June
+            cal.set(Calendar.WEEK_OF_MONTH, 1);
+            cal.set(Calendar.MONTH, Calendar.JUNE);
+            cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+
+            // subtract one week from that date to get the previous monday,
+            // which will be the last monday in may, or memorial day.
+            cal.add(Calendar.WEEK_OF_MONTH, (cal.get(Calendar.WEEK_OF_MONTH) - 1));
+            cal.set(Calendar.MONTH, Calendar.MAY);
+
+            Log.e(TAG, String.format("memorial day is on the %d of May this year", LocalDateTime.ofInstant(cal.getTime().toInstant(), ZoneId.of("America/Montreal")).toLocalDate().getDayOfMonth()));
+            Log.e(TAG, String.format("Month: %d", LocalDateTime.ofInstant(cal.getTime().toInstant(), ZoneId.of("America/Montreal")).toLocalDate().getMonth().getValue()));
+
+            // return the day of the month
+            return LocalDateTime.ofInstant(cal.getTime().toInstant(), ZoneId.of("America/Montreal")).toLocalDate().getDayOfMonth();
+
+        }
+
+        Log.e(TAG, "that didn't work...");
+        return -1;
     }
 }
