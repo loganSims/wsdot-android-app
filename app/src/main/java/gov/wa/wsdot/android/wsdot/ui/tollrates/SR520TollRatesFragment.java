@@ -30,7 +30,10 @@ import android.widget.TextView;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.time.ZoneId;
+import java.time.temporal.TemporalAdjusters;
+import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.EnumSet;
@@ -82,7 +85,7 @@ public class SR520TollRatesFragment extends BaseFragment {
         // FILL_PARENT / WRAP_CONTENT, making the progress bar stick to the top of the activity.
         root.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
-        
+
         return root;
     }
 
@@ -193,7 +196,7 @@ public class SR520TollRatesFragment extends BaseFragment {
 
             HashMap<String, String> map = mData.get(position);
 
-            if (getItemViewType(position) == TYPE_ITEM){
+            if (getItemViewType(position) == TYPE_ITEM) {
                 itemholder = (ItemViewHolder) viewholder;
                 itemholder.hours.setText(map.get("hours"));
                 itemholder.hours.setTypeface(tf);
@@ -201,7 +204,7 @@ public class SR520TollRatesFragment extends BaseFragment {
                 itemholder.goodToGoPass.setTypeface(tf);
                 itemholder.payByMail.setText(map.get("pay_by_mail"));
                 itemholder.payByMail.setTypeface(tf);
-            }else{
+            } else {
                 titleholder = (TitleViewHolder) viewholder;
                 titleholder.hours.setText(map.get("hours"));
                 titleholder.hours.setTypeface(tfb);
@@ -236,6 +239,7 @@ public class SR520TollRatesFragment extends BaseFragment {
     }
 
     public static class ItemViewHolder extends RecyclerView.ViewHolder {
+
         protected TextView hours;
         protected TextView goodToGoPass;
         protected TextView payByMail;
@@ -249,6 +253,7 @@ public class SR520TollRatesFragment extends BaseFragment {
     }
 
     public static class TitleViewHolder extends RecyclerView.ViewHolder {
+
         protected TextView hours;
         protected TextView goodToGoPass;
         protected TextView payByMail;
@@ -261,7 +266,7 @@ public class SR520TollRatesFragment extends BaseFragment {
         }
     }
 
-    private static int getTollIndex(){
+    private static int getTollIndex() {
 
         if (Build.VERSION.SDK_INT > 25) {
 
@@ -375,10 +380,7 @@ public class SR520TollRatesFragment extends BaseFragment {
             Log.e(TAG, String.valueOf(weekday));
             Log.e(TAG, String.valueOf(day));
 
-            getMemorialDayForYear(date.getYear());
-
             if (day == 1 && month == 1) { // New Years
-                Log.e(TAG, "happy new year!");
                 return true;
             } else if (month == 5 && day == getMemorialDayForYear(date.getYear())) { // Memorial Day
                 return true;
@@ -393,7 +395,6 @@ public class SR520TollRatesFragment extends BaseFragment {
             }
         }
 
-        Log.e(TAG, "No holiday today...");
 
         return false;
     }
@@ -401,34 +402,23 @@ public class SR520TollRatesFragment extends BaseFragment {
     // returns the date of memorial day for the given year
     private static int getMemorialDayForYear(int year) {
 
-        Log.e(TAG, "checking for memorial day");
-
         if (Build.VERSION.SDK_INT > 25) {
 
             Calendar cal = Calendar.getInstance();
 
             // set calendar to current year based on date given
             cal.set(Calendar.YEAR, year);
-
-            // set calendar to the first monday of June
-            cal.set(Calendar.WEEK_OF_MONTH, 1);
-            cal.set(Calendar.MONTH, Calendar.JUNE);
-            cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-
-            // subtract one week from that date to get the previous monday,
-            // which will be the last monday in may, or memorial day.
-            cal.add(Calendar.WEEK_OF_MONTH, (cal.get(Calendar.WEEK_OF_MONTH) - 1));
             cal.set(Calendar.MONTH, Calendar.MAY);
 
-            Log.e(TAG, String.format("memorial day is on the %d of May this year", LocalDateTime.ofInstant(cal.getTime().toInstant(), ZoneId.of("America/Montreal")).toLocalDate().getDayOfMonth()));
-            Log.e(TAG, String.format("Month: %d", LocalDateTime.ofInstant(cal.getTime().toInstant(), ZoneId.of("America/Montreal")).toLocalDate().getMonth().getValue()));
+            LocalDate refDate =  LocalDateTime.ofInstant(cal.getTime().toInstant(), ZoneId.of("America/Montreal")).toLocalDate();
+
+            LocalDate memorialDay = YearMonth.from(refDate)
+                    .atEndOfMonth()                                             // Get the last day of month as a `LocalDate`.
+                    .with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));  // Move to another date for a Monday, or remain if already on a Monday.
 
             // return the day of the month
-            return LocalDateTime.ofInstant(cal.getTime().toInstant(), ZoneId.of("America/Montreal")).toLocalDate().getDayOfMonth();
-
+            return memorialDay.getDayOfMonth();
         }
-
-        Log.e(TAG, "that didn't work...");
         return -1;
     }
 }
