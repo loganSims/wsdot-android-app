@@ -18,7 +18,9 @@
 
 package gov.wa.wsdot.android.wsdot.ui.tollrates;
 
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.hardware.camera2.params.BlackLevelPattern;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -204,6 +206,14 @@ public class SR520TollRatesFragment extends BaseFragment {
                 itemholder.goodToGoPass.setTypeface(tf);
                 itemholder.payByMail.setText(map.get("pay_by_mail"));
                 itemholder.payByMail.setTypeface(tf);
+
+                if (position == getTollIndex()) {
+                    itemholder.itemView.setBackgroundColor(getResources().getColor(R.color.primary_default));
+                    itemholder.hours.setTextColor(getResources().getColor(R.color.white));
+                    itemholder.goodToGoPass.setTextColor(getResources().getColor(R.color.white));
+                    itemholder.payByMail.setTextColor(getResources().getColor(R.color.white));
+                }
+
             } else {
                 titleholder = (TitleViewHolder) viewholder;
                 titleholder.hours.setText(map.get("hours"));
@@ -394,7 +404,6 @@ public class SR520TollRatesFragment extends BaseFragment {
                 return true;
             }
         }
-
 
         return false;
     }
