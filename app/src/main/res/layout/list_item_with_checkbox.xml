@@ -12,7 +12,7 @@
         android:layout_alignParentEnd="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:buttonTint="@color/primary_default"
+        android:textColor="?attr/secondaryTextColor"
         android:contentDescription="@string/description_star" />
 
     <TextView
@@ -20,7 +20,7 @@
         android:layout_toLeftOf="@id/checkbox"
         android:layout_toStartOf="@id/checkbox"
         android:textSize="@dimen/text_size_large"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorPrimary"
         android:layout_marginBottom="7dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

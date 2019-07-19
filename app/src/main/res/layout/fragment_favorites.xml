@@ -5,7 +5,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swipe_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -43,7 +42,7 @@
     <TextView
         android:id="@+id/empty_list_view"
         android:textSize="@dimen/text_size_medium"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintDimensionRatio="H,1:1"

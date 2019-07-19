@@ -149,8 +149,6 @@ public class FerriesRouteSchedulesFragment extends BaseFragment implements
 	 * @see RecyclerView.Adapter
 	 */
 	private class RouteSchedulesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-		private Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Regular.ttf");
-		private Typeface tfb = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Bold.ttf");
         private Context context;
 
         public RouteSchedulesAdapter(Context context) {
@@ -173,14 +171,13 @@ public class FerriesRouteSchedulesFragment extends BaseFragment implements
             FerryScheduleEntity schedule = mSchedule.get(position);
 
             holder.title.setText(schedule.getTitle());
-            holder.title.setTypeface(tfb);
+            //holder.title.setTypeface(tfb);
 
             String text = schedule.getCrossingTime();
 
             // Set onClickListener for holder's view
             holder.view.setOnClickListener(
                     v -> {
-
                         Bundle b = new Bundle();
                         Intent intent = new Intent(getActivity(), FerriesRouteSchedulesDayDeparturesActivity.class);
                         b.putInt("scheduleId", schedule.getFerryScheduleId());
@@ -196,11 +193,10 @@ public class FerriesRouteSchedulesFragment extends BaseFragment implements
                     holder.text.setText("");
                 } else {
                     holder.text.setText("Crossing Time: ~ " + text + " min");
-                    holder.text.setTypeface(tf);
                 }
             } catch (NullPointerException e) {
                 e.printStackTrace();
-            }
+             }
 
             String created_at = schedule.getUpdated();
 
@@ -216,8 +212,6 @@ public class FerriesRouteSchedulesFragment extends BaseFragment implements
             } catch (Exception e) {
                 holder.created_at.setText(ParserUtils.relativeTime(created_at, "yyyy-MM-dd h:mm a", false));
             }
-
-            holder.created_at.setTypeface(tf);
 
             holder.star_button.setTag(schedule.getFerryScheduleId());
             // Seems when Android recycles the views, the onCheckedChangeListener is still active

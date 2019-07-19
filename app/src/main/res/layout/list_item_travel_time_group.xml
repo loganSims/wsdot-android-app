@@ -32,7 +32,7 @@
         android:layout_toStartOf="@id/star_button"
 	    android:layout_toLeftOf="@id/star_button"
 	    android:textSize="@dimen/text_size_large"
-        android:textColor="@color/black" />
+        android:textColor="?android:attr/textColorPrimary" />
 
     <LinearLayout
         android:id="@+id/travel_times_linear_layout"

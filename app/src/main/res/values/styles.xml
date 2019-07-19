@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="WSDOT" parent="Theme.AppCompat.Light.NoActionBar">
-        <!--   your app branding color for the app bar -->
-        <item name="colorPrimary">@color/primary_default</item>
-        <!--   darker variant for the status bar and contextual app bars -->
-        <!-- <item name="colorPrimaryDark">#004D40</item> -->
-        <item name="colorPrimaryDark">@color/primary_dark_default</item>
+    <style name="WSDOT" parent="Theme.AppCompat.DayNight.NoActionBar" >
 
-        <!--   theme UI controls like checkboxes and text fields -->
+        <item name="colorPrimary">@color/primary_default</item>
+        <item name="colorPrimaryDark">@color/primary_dark_default</item>
         <item name="colorAccent">@color/accent_default</item>
+
+        <item name="secondaryTextColor">@color/secondary_text_color</item>
+        <item name="secondaryBackgroundColor">@color/secondary_background_color</item>
+        <item name="secondaryOffBackgroundColor">@color/secondary_off_background_color</item>
+
 
         <item name="fabButtonColor">@color/primary_default</item>
 
@@ -19,7 +19,7 @@
 
     </style>
 
-    <style name="WSDOTWorkerOrange" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="WSDOTWorkerOrange" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!--   your app branding color for the app bar -->
         <item name="colorPrimary">@color/primary_worker</item>
         <!--   darker variant for the status bar and contextual app bars -->
@@ -68,7 +68,7 @@
     <style name="WSDOT.popup" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowBackground">@color/cardview_light_background</item>
+        <item name="android:windowBackground">@color/secondary_background_color</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowMinWidthMajor">@android:dimen/dialog_min_width_major</item>
@@ -96,7 +96,7 @@
         <item name="android:textSize">@dimen/text_size_micro</item>
         <item name="android:textStyle">bold</item>
         <item name="android:background">@null</item>
-        <item name="android:textColor">?attr/colorPrimaryDark</item>
+        <item name="android:textColor">?attr/secondaryTextColor</item>
     </style>
 
     <style name="CollapsedAppBar" parent="@android:style/TextAppearance.Medium">
@@ -131,7 +131,7 @@
         <item name="android:layout_height">fill_parent</item>
         <item name="android:textSize">@dimen/text_size_small</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/body_text_1</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:maxLines">2</item>
         <item name="android:paddingLeft">@dimen/high_impact_alerts_item_padding</item>
         <item name="android:paddingRight">@dimen/high_impact_alerts_item_padding</item>
@@ -141,13 +141,13 @@
     <style name="HighImpactAlertsStaticItem" parent="@style/HighImpactAlertsItemBase">
         <item name="android:textSize">@dimen/text_size_small</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/body_text_1</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:maxLines">2</item>
         <item name="android:ellipsize">end</item>
     </style>
 
     <style name="HighImpactAlertsButtonItem" parent="@style/HighImpactAlertsStaticItem">
-        <item name="android:textColor">?attr/colorPrimaryDark</item>
+        <item name="android:textColor">@color/secondary_text_color</item>
         <item name="android:background">@drawable/high_impact_alerts_button</item>
         <item name="android:paddingRight">@dimen/high_impact_alerts_button_right_padding</item>
         <item name="android:focusable">true</item>
@@ -157,7 +157,7 @@
     <style name="TextHeader">
         <item name="android:textSize">@dimen/text_size_large</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/body_text_1</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:ellipsize">end</item>
     </style>
 

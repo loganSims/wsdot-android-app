@@ -6,7 +6,7 @@
 	android:layout_margin="8dp"
 	android:id="@+id/cv">
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content">
 
@@ -16,7 +16,6 @@
 		android:layout_height="wrap_content" >
     
 	    <gov.wa.wsdot.android.wsdot.ui.widget.ResizeableImageView
-		    xmlns:android="http://schemas.android.com/apk/res/android"
 			android:id="@+id/image"
 			android:adjustViewBounds="true"
 			android:layout_alignParentTop="true"
@@ -54,7 +53,7 @@
     <TextView
         android:id="@+id/description"
 		android:textSize="@dimen/text_size_medium"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorPrimary"
 		android:maxLines="2"
 		android:ellipsize="end"
 		android:paddingTop="8dp"

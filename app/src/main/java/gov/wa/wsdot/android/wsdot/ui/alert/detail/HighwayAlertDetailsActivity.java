@@ -77,7 +77,6 @@ public class HighwayAlertDetailsActivity extends BaseActivity implements
         AndroidInjection.inject(this);
 		super.onCreate(savedInstanceState);
 
-
         setContentView(R.layout.activity_with_lite_mapview);
 
         title = "Highway Alert";

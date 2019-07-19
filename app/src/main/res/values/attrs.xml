@@ -9,4 +9,14 @@
     <declare-styleable name="ThemeStyles">
         <attr name="fabButtonColor" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="AppTheme">
+        <attr name="primaryTextColor" format="color"/>
+        <attr name="secondaryTextColor" format="color"/>
+        <attr name="dividerColor" format="color"/>
+        <attr name="secondaryBackgroundColor" format="color"/>
+        <attr name="secondaryOffBackgroundColor" format="color"/>
+        <attr name="iconPlaceholder" format="integer"/>
+    </declare-styleable>
+
 </resources>

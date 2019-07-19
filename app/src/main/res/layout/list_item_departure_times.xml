@@ -8,7 +8,7 @@
     <TextView
         android:id="@+id/departing"
         android:textSize="@dimen/text_size_large"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorPrimary"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -19,7 +19,7 @@
     <TextView
         android:id="@+id/arriving"
         android:textSize="@dimen/text_size_large"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorPrimary"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
@@ -30,7 +30,7 @@
 	<TextView
 		android:id="@+id/actualDeparture"
 		android:textSize="@dimen/text_size_medium"
-		android:textColor="@color/black"
+		android:textColor="?android:attr/textColorPrimary"
 		android:layout_alignParentLeft="true"
 		android:layout_alignParentStart="true"
         android:layout_below="@id/departing"
@@ -41,7 +41,7 @@
 	<TextView
 		android:id="@+id/eta"
 		android:textSize="@dimen/text_size_medium"
-		android:textColor="@color/black"
+		android:textColor="?android:attr/textColorPrimary"
 		android:layout_alignParentRight="true"
 		android:layout_alignParentEnd="true"
         android:layout_below="@id/arriving"
@@ -52,7 +52,7 @@
     <TextView
         android:id="@+id/annotation"
         android:textSize="@dimen/text_size_medium"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorPrimary"
         android:layout_below="@id/actualDeparture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
 	        <TextView
 	            android:id="@+id/driveUpSpaceCount"
 	            android:textSize="@dimen/text_size_medium"
-                android:textColor="@color/black"
+                android:textColor="?android:attr/textColorPrimary"
 	            android:gravity="center"
 	            android:layout_width="match_parent"
 	            android:layout_height="match_parent"
@@ -93,7 +93,7 @@
 	        android:id="@+id/driveUpSpaces"
 	        android:textSize="@dimen/text_size_medium"
 	        android:text="@string/drive_up_spaces"
-            android:textColor="@color/black"
+            android:textColor="?android:attr/textColorPrimary"
 	        android:layout_centerVertical="true"
 	        android:layout_toRightOf="@+id/driveUpProgressBarGroup"
 	        android:layout_width="match_parent"
@@ -107,7 +107,7 @@
         android:id="@+id/driveUpSpacesDisclaimer"
         android:textSize="@dimen/text_size_small"
         android:text="@string/drive_up_spaces_disclaimer"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorPrimary"
         android:layout_below="@+id/vehicleSpaceGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -19,11 +19,15 @@
 package gov.wa.wsdot.android.wsdot.ui.ferries.departures;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.format.DateUtils;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,9 +89,6 @@ public class FerriesRouteSchedulesDayDeparturesFragment extends BaseFragment
     @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-
-        tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Regular.ttf");
-        tfb = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Bold.ttf");
 
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_route_schedules_day_departures, null);
 
@@ -240,9 +241,7 @@ public class FerriesRouteSchedulesDayDeparturesFragment extends BaseFragment
             dateFormat.setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
 
             TimesViewHolder itemHolder;
-
             FerriesScheduleTimesItem item = getItem(position);
-
             itemHolder = (TimesViewHolder) holder;
 
             Date now = new Date();
@@ -252,11 +251,17 @@ public class FerriesRouteSchedulesDayDeparturesFragment extends BaseFragment
                     itemHolder.departing.setTextColor(getResources().getColor(R.color.semi_white));
                     itemHolder.arriving.setTextColor(getResources().getColor(R.color.semi_white));
                     itemHolder.annotation.setTextColor(getResources().getColor(R.color.semi_white));
-
                 } else {
-                    itemHolder.departing.setTextColor(getResources().getColor(R.color.body_text_1));
-                    itemHolder.arriving.setTextColor(getResources().getColor(R.color.body_text_1));
-                    itemHolder.annotation.setTextColor(getResources().getColor(R.color.body_text_1));
+
+                    TypedValue typedValue = new TypedValue();
+
+                    TypedArray a = getActivity().obtainStyledAttributes(typedValue.data, new int[] { android.R.attr.textColorPrimary });
+                    int color = a.getColor(0, 0);
+                    a.recycle();
+
+                    itemHolder.departing.setTextColor(color);
+                    itemHolder.arriving.setTextColor(color);
+                    itemHolder.annotation.setTextColor(color);
                 }
             }
 

@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/title"
         android:textSize="@dimen/text_size_large"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
@@ -17,7 +17,7 @@
     <TextView
         android:id="@+id/content"
         android:textSize="@dimen/text_size_small"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/title"

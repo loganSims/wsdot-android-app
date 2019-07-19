@@ -28,6 +28,7 @@ import com.crashlytics.android.Crashlytics;
 
 import javax.inject.Inject;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.multidex.MultiDexApplication;
 import dagger.android.AndroidInjector;
@@ -60,6 +61,8 @@ public class WsdotApplication extends MultiDexApplication implements HasActivity
     public void onCreate() {
         super.onCreate();
         AppInjector.init(this);
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
         if (BuildConfig.DEBUG) {
             Log.d(WsdotApplication.class.getSimpleName(), "init crashlytics in debug mode");

@@ -18,12 +18,12 @@
 
         <TextView
             android:id="@+id/event_details"
-            android:textColor="@color/black"
+            android:textColor="?android:attr/textColorPrimary"
             android:hyphenationFrequency="none"
             android:textSize="@dimen/text_size_medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorLink="@color/primary_default"
+            android:textColorLink="?attr/secondaryTextColor"
             android:autoLink="web"
             android:padding="16dp"/>
 

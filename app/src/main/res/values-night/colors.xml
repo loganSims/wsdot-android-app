@@ -5,9 +5,9 @@
     <color name="semi_white">#f888</color>
     <color name="semi_black">#ff7d7d7d</color>
 
-    <color name="secondary_text_color">#004D40</color>
-    <color name="secondary_background_color">#E0E0E0</color>
-    <color name="secondary_off_background_color">#f333</color>
+    <color name="secondary_text_color">#008065</color>
+    <color name="secondary_background_color">#f333</color>
+    <color name="secondary_off_background_color">#E0E0E0</color>
 
     <color name="body_text_1">#ff000000</color>
 
@@ -21,7 +21,7 @@
     <color name="accent_1">#ff006f80</color>
     <color name="dark_orange">#c43b00</color>
 
-    <color name="primary_default">#008065</color>
+    <color name="primary_default">#004D40</color>
     <color name="primary_dark_default">#004D40</color>
     <color name="accent_default">#FFEA00</color>
 
