@@ -26,6 +26,8 @@ import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -82,6 +84,7 @@ import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.Task;
@@ -401,6 +404,44 @@ public class TrafficMapActivity extends BaseActivity implements
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+        try {
+            // Customise the styling of the base map using a JSON object defined
+            // in a raw resource file.
+            int nightModeFlags =
+                    getResources().getConfiguration().uiMode &
+                            Configuration.UI_MODE_NIGHT_MASK;
+
+            boolean success = false;
+
+            switch (nightModeFlags) {
+                case Configuration.UI_MODE_NIGHT_YES:
+                    success = googleMap.setMapStyle(
+                            MapStyleOptions.loadRawResourceStyle(
+                                    this, R.raw.maps_dark_style));
+                    break;
+
+                case Configuration.UI_MODE_NIGHT_NO:
+                    success = googleMap.setMapStyle(
+                            MapStyleOptions.loadRawResourceStyle(
+                                    this, R.raw.maps_light_style));
+                    break;
+
+                case Configuration.UI_MODE_NIGHT_UNDEFINED:
+                    success = googleMap.setMapStyle(
+                            MapStyleOptions.loadRawResourceStyle(
+                                    this, R.raw.maps_light_style));
+                    break;
+            }
+
+
+            if (!success) {
+                Log.e(TAG, "Style parsing failed.");
+            }
+        } catch (Resources.NotFoundException e) {
+            Log.e(TAG, "Can't find style. Error: ", e);
+        }
+
         mMap.getUiSettings().setCompassEnabled(true);
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
         mMap.setTrafficEnabled(true);

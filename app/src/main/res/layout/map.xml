@@ -44,7 +44,7 @@
                 android:id="@+id/fabLabelRestareas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:color/background_light"
+                android:background="?attr/secondaryBackgroundColor"
                 android:padding="3dp"
                 android:elevation="6dp"
                 android:text="Rest Areas"/>
@@ -78,7 +78,7 @@
                 android:id="@+id/fabLabelAlerts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:color/background_light"
+                android:background="?attr/secondaryBackgroundColor"
                 android:padding="3dp"
                 android:elevation="6dp"
                 android:text="Highway Alerts"/>
@@ -110,7 +110,7 @@
                 android:id="@+id/fabLabelClusters"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:color/background_light"
+                android:background="?attr/secondaryBackgroundColor"
                 android:padding="3dp"
                 android:elevation="6dp"
                 android:text="Camera Clustering"/>
@@ -123,7 +123,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginStart="5dp"
                 android:scaleType="center"
-                android:tint="@color/white"
+                android:background="?attr/secondaryBackgroundColor"
                 app:backgroundTint="?attr/colorPrimary"
                 app:srcCompat="@drawable/ic_on" />
         </LinearLayout>
@@ -142,7 +142,7 @@
                 android:id="@+id/fabLabelCameras"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:color/background_light"
+                android:background="?attr/secondaryBackgroundColor"
                 android:padding="3dp"
                 android:elevation="6dp"
                 android:text="Cameras"/>
@@ -155,7 +155,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginStart="5dp"
                 android:scaleType="center"
-                android:tint="@color/white"
+                android:background="?attr/secondaryBackgroundColor"
                 app:backgroundTint="?attr/colorPrimary"
                 app:srcCompat="@drawable/ic_on" />
         </LinearLayout>

@@ -62,7 +62,7 @@ public class WsdotApplication extends MultiDexApplication implements HasActivity
         super.onCreate();
         AppInjector.init(this);
 
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
         if (BuildConfig.DEBUG) {
             Log.d(WsdotApplication.class.getSimpleName(), "init crashlytics in debug mode");

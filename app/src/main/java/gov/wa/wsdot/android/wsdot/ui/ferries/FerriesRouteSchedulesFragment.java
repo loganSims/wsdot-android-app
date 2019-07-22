@@ -137,7 +137,6 @@ public class FerriesRouteSchedulesFragment extends BaseFragment implements
                 mRecyclerView.setVisibility(View.VISIBLE);
             }
         });
-
         return root;
 	}
 
