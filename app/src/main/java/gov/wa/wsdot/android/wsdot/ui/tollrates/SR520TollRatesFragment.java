@@ -18,9 +18,11 @@
 
 package gov.wa.wsdot.android.wsdot.ui.tollrates;
 
+import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -128,14 +130,12 @@ public class SR520TollRatesFragment extends BaseFragment implements
             if (tollRateTable != null) {
 
                 mAdapter.mData.clear();
-
                 mEmptyView.setVisibility(View.GONE);
 
                 if (!tollRateTable.tollRateTableData.getMessage().equals("")) {
                     mMessageView.setVisibility(View.VISIBLE);
                     ((TextView) mMessageView).setText(tollRateTable.tollRateTableData.getMessage());
                 }
-
 
                 for (TollRowEntity row: tollRateTable.rows) {
 
@@ -215,20 +215,32 @@ public class SR520TollRatesFragment extends BaseFragment implements
                     itemholder.payByMail.setText(rowArray[2]);
                     itemholder.payByMail.setTypeface(tf);
 
-                    int bgColor = getResources().getColor(R.color.primary_default);
-                    int white = getResources().getColor(R.color.white);
-                    int black = getResources().getColor(R.color.body_text_1);
+                    TypedValue typedValue = new TypedValue();
 
-                    itemholder.itemView.setBackgroundColor(white);
-                    itemholder.hours.setTextColor(black);
-                    itemholder.goodToGoPass.setTextColor(black);
-                    itemholder.payByMail.setTextColor(black);
+                    TypedArray a = getActivity().obtainStyledAttributes(typedValue.data, new int[] { android.R.attr.textColorPrimary });
+                    int textColor = a.getColor(0, 0);
+                    a.recycle();
+
+                    TypedArray primary = getActivity().obtainStyledAttributes(typedValue.data, new int[] { R.attr.colorPrimary });
+                    int primaryColor = primary.getColor(0, 0);
+                    primary.recycle();
+
+                    TypedArray bg = getActivity().obtainStyledAttributes(typedValue.data, new int[] { android.R.attr.background });
+                    int bgColor = bg.getColor(0, 0);
+                    primary.recycle();
+
+                    int white = getResources().getColor(R.color.white);
+
+                    itemholder.itemView.setBackgroundColor(bgColor);
+                    itemholder.hours.setTextColor(textColor);
+                    itemholder.goodToGoPass.setTextColor(textColor);
+                    itemholder.payByMail.setTextColor(textColor);
 
                     if (Utils.isCurrentHour(row.getStartTime(), row.getEndTime(), Calendar.getInstance())){
                         if ((row.getWeekday() && !Utils.isWeekendOrWAC_468_270_071Holiday(Calendar.getInstance()))
                                 || (!row.getWeekday() && Utils.isWeekendOrWAC_468_270_071Holiday(Calendar.getInstance()))) {
 
-                            itemholder.itemView.setBackgroundColor(bgColor);
+                            itemholder.itemView.setBackgroundColor(primaryColor);
                             itemholder.hours.setTextColor(white);
                             itemholder.goodToGoPass.setTextColor(white);
                             itemholder.payByMail.setTextColor(white);

@@ -16,7 +16,7 @@
         android:paddingStart="8dp"
         android:paddingLeft="8dp"
         android:textSize="@dimen/text_size_small"
-        android:textColor="?android:attr/textColorPrimary"
+        android:textColor="?attr/secondaryTextColor"
         app:layout_constraintBottom_toTopOf="@id/travel_time_text"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -60,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight=".5"
-            android:textColor="?attr/secondaryTextColor"
+            android:textColor="@drawable/segment_text_selected"
             android:text="Northbound"
             android:button="@null"
             android:background="@drawable/segment_left_button_background"/>
@@ -76,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight=".5"
-            android:textColor="?attr/secondaryTextColor"
+            android:textColor="@drawable/segment_text_selected"
             android:text="Southbound"
             android:button="@null"
             android:background="@drawable/segment_right_button_background"/>

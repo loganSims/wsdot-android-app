@@ -129,7 +129,6 @@ public class HighImpactAlertsFragment extends BaseFragment implements
                 mPager.setAdapter(mAdapter);
                 mTabLayoutWithPager.setupWithViewPager(mPager, true);
 
-
                 mPager.setVisibility(View.VISIBLE);
                 mTabLayoutWithPager.setVisibility(View.VISIBLE);
 

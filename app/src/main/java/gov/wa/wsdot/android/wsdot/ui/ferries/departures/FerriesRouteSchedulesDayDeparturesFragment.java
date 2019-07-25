@@ -254,7 +254,6 @@ public class FerriesRouteSchedulesDayDeparturesFragment extends BaseFragment
                 } else {
 
                     TypedValue typedValue = new TypedValue();
-
                     TypedArray a = getActivity().obtainStyledAttributes(typedValue.data, new int[] { android.R.attr.textColorPrimary });
                     int color = a.getColor(0, 0);
                     a.recycle();

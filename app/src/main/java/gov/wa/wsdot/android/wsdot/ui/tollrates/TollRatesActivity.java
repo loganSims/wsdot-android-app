@@ -123,7 +123,7 @@ public class TollRatesActivity extends BaseActivity {
         boolean seenTip = settings.getBoolean("KEY_SEEN_TOLL_WARNING", false);
 
         if (!seenTip) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.WSDOT_popup);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("Remember to never use the WSDOT app while driving.");
             builder.setPositiveButton("Ok", (dialog, whichButton) -> dialog.dismiss());
             AlertDialog alertDialog = builder.create();

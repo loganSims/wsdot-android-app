@@ -21,6 +21,8 @@ package gov.wa.wsdot.android.wsdot.ui.tollrates;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -28,6 +30,7 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -165,7 +168,6 @@ public class SR167TollRatesFragment extends BaseFragment
 		content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
 		header_link.setText(content);
 
-		header_link.setTextColor(getResources().getColor(R.color.primary_default));
 		header_link.setOnClickListener(v -> {
 			Intent intent = new Intent();
 			((BaseActivity) getActivity()).setFirebaseAnalyticsEvent("open_link", "type", "tolling_hot_lanes");
@@ -424,7 +426,14 @@ public class SR167TollRatesFragment extends BaseFragment
         cv.findViewById(R.id.title).setVisibility(View.GONE);
 
 		((TextView) cv.findViewById(R.id.subtitle)).setText("Show on map");
-		((TextView) cv.findViewById(R.id.subtitle)).setTextColor(context.getResources().getColor(R.color.primary_default));
+
+		TypedValue typedValue = new TypedValue();
+
+		TypedArray a = context.obtainStyledAttributes(typedValue.data, new int[] { R.attr.secondaryTextColor });
+		int textColor = a.getColor(0, 0);
+		a.recycle();
+
+		((TextView) cv.findViewById(R.id.subtitle)).setTextColor(textColor);
 		cv.findViewById(R.id.subtitle).setOnClickListener(v -> {
 			Bundle b = new Bundle();
 

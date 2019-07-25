@@ -5,16 +5,15 @@
     <color name="semi_white">#f888</color>
     <color name="semi_black">#ff7d7d7d</color>
 
-    <color name="secondary_text_color">#00B140</color>
     <color name="secondary_background_color">#f333</color>
     <color name="secondary_off_background_color">#E0E0E0</color>
 
     <color name="body_text_1">#ff000000</color>
 
-    <color name="holo_blue_bright">#ff00ddff</color>
-    <color name="holo_green_light">#ff99cc00</color>
-    <color name="holo_orange_light">#ffffbb33</color>
-    <color name="holo_red_light">#ffff4444</color>
+    <color name="holo_blue_bright">#6600ddff</color>
+    <color name="holo_green_light">#6699cc00</color>
+    <color name="holo_orange_light">#66ffbb33</color>
+    <color name="holo_red_light">#66ff4444</color>
 
     <color name="alerts">#E0E0E0</color>
 
@@ -25,7 +24,9 @@
     <color name="primary_dark_default">#004D40</color>
     <color name="accent_default">#FFEA00</color>
 
-    <color name="primary_worker">#FF6C0C</color>
+    <color name="secondary_text">@color/accent_default</color>
+
+    <color name="primary_worker">#c43b00</color>
     <color name="primary_dark_worker">#c43b00</color>
     <color name="accent_worker">#FFEA00</color>
 

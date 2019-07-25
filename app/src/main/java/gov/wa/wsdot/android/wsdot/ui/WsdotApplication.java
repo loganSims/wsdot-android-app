@@ -23,11 +23,8 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.util.Log;
-
 import com.crashlytics.android.Crashlytics;
-
 import javax.inject.Inject;
-
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.multidex.MultiDexApplication;
@@ -62,7 +59,7 @@ public class WsdotApplication extends MultiDexApplication implements HasActivity
         super.onCreate();
         AppInjector.init(this);
 
-        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
         if (BuildConfig.DEBUG) {
             Log.d(WsdotApplication.class.getSimpleName(), "init crashlytics in debug mode");
@@ -84,9 +81,7 @@ public class WsdotApplication extends MultiDexApplication implements HasActivity
         editor.putBoolean("KEY_SEEN_DRIVER_ALERT", false);
         editor.apply();
 
-
     }
-
 
     @Override
     public DispatchingAndroidInjector<Activity> activityInjector() {
@@ -102,6 +97,5 @@ public class WsdotApplication extends MultiDexApplication implements HasActivity
     public AndroidInjector<Service> serviceInjector() {
         return dispatchingServiceInjector;
     }
-
 
 }

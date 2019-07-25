@@ -19,10 +19,12 @@
 package gov.wa.wsdot.android.wsdot.ui.traveltimes;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -340,7 +342,11 @@ public class TravelTimesFragment extends BaseFragment implements
             } else if ((current > average) && (average != 0)) {
                 currentTimeTextView.setTextColor(Color.RED);
             } else {
-                currentTimeTextView.setTextColor(Color.BLACK);
+                TypedValue typedValue = new TypedValue();
+                TypedArray a = context.obtainStyledAttributes(typedValue.data, new int[] { android.R.attr.textColorPrimary });
+                int textColor = a.getColor(0, 0);
+                a.recycle();
+                currentTimeTextView.setTextColor(textColor);
             }
 
             currentTimeTextView.setText(current + " min");
